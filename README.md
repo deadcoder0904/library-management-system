@@ -1,6 +1,10 @@
 # library-management-system
 
+> Library Management System using Vue JS & Firebase :heart_eyes:
 
+# Screenshot
+
+![library-management-system](http://imgur.com/ErmM3o3.png)
 
 ## License
 

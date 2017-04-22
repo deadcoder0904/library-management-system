@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Library Management System</title>
+	<link rel='stylesheet' href='css/tachyons.min.css'/>
+	<link rel='stylesheet' href='css/sweetalert2.min.css'/>
+	<link rel='stylesheet' href='css/style.css'/>
+</head>
+
+<body>
+	<div id='app'>
+
+		<header class=" white black-80 tc pv4 avenir">
+		  <h1 class="mt2 mb0 baskerville i fw1 f1">Library Management System</h1>
+		  <h2 class="mt2 mb0 f6 fw4 ttu tracked">Mini Project for Cloud Computing</h2>
+		  <nav class="tc mw7 center mt4">
+		    <button class="f6 f5-l link bg-animate black-80 hover-bg-green dib pa3 ph4-l black pointer ba-0 bw0 br3  pa2 ma2" @click="makeActive('Customer')">Customer</button>
+		    <button class="f6 f5-l link bg-animate black-80 hover-bg-blue dib pa3 ph4-l black pointer ba-0 bw0 br3 pa2 ma2" @click="makeActive('AddBook')">Add Book</button>
+		    <button class="f6 f5-l link bg-animate black-80 hover-bg-orange dib pa3 ph4-l black pointer ba-0 bw0 br3 pa2 ma2" @click="makeActive('Admin')">Admin</button>
+		  </nav>
+		</header>
+
+		<div id="customer" v-show="isActiveTab('Customer')" class="tc white">
+			<h1 class="f1">Take a book for a week from the Library</h1>
+			<main class="cf w-100">
+			  <div v-for="book in books" v-if="!book.taken" class="fl w-50 w-third-m w-20-ns pa3 grow pointer" @click="takeBook(book)">
+			    <div class="aspect-ratio aspect-ratio--1x1">
+			      <img :src="book.cover" class="db bg-center cover aspect-ratio--object" />
+			    </div>
+			     <h3 class="f3 bg-black-50 pa2">{{book.name}}</h3>
+			  </div>
+			</main>
+		</div>
+
+		<div id="add-book" v-show="isActiveTab('AddBook')" class="tc white">
+			<h1 class="f1">Insert Book into Library</h1>
+			<article class="pa4 black-80 bg-black-50 mh4">
+			  <form action="sign-up_submit" @submit.prevent="addBook" accept-charset="utf-8" autocomplete="off">
+			    <fieldset id="sign_up" class="ba b--transparent ph0 mh0">
+			      <legend class="ph0 mh0 fw6 clip">Sign Up</legend>
+			      <div class="mt3">
+			        <label class="db fw4 lh-copy f4 white" for="name">Book Name</label>
+			        <input class="pa2 input-reset ba  bg-transparent w-100 b--white white" type="text" name="name"  id="name" v-model="book.name">
+			      </div>
+			      <div class="mt3">
+			        <label class="db fw4 lh-copy f4 white" for="cover">Book Cover</label>
+			        <input class="b pa2 input-reset ba bg-transparent w-100  b--white white" type="text" name="cover"  id="cover" v-model="book.cover">
+			      </div>
+			    </fieldset>
+			    <div class="mt3"><input class="white b ph3 pv2 input-reset ba b--white bg-transparent grow pointer f6" type="submit" value="Add Book"></div>
+			  </form>
+			</article>
+		</div>
+
+		<div id="admin" v-show="isActiveTab('Admin')" class="tc white">
+			<h1 class="f1">View all books in the Library</h1>
+			<main class="cf w-100">
+			  <div v-for="book in books" class="fl w-50 w-third-m w-20-ns pa3 grow">
+			    <div class="aspect-ratio aspect-ratio--1x1" :class="{'sold-out': book.taken}">
+			      <img :src="book.cover" class="db tc bg-center cover aspect-ratio--object" />
+			    </div>
+			     <h3 class="f3 bg-black-50 pa2">{{book.name}}</h3>
+			  </div>
+			</main>
+		</div>
+	</div>
+
+	<script src='js/vue.min.js'></script>
+	<script src='js/sweetalert2.min.js'></script>
+	<script src='js/firebase.js'></script>
+	<script src='js/vuefire.js'></script>
+	<script src='js/app.js'></script>
+</body>
+</html>
