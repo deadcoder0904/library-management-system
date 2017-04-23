@@ -38,13 +38,32 @@ new Vue({
 			  cancelButtonColor: '#d33',
 			  confirmButtonText: 'Yes!'
 			}).then(function () {
-				booksRef,booksRef.child(book['.key']).update({"taken": true});
+				booksRef.child(book['.key']).update({"taken": true});
 				swal(
 				  'Successful',
 				  'Book taken Successfully!!!',
 				  'success'
 				);
 			});
+        },
+        returnBook: function(book) {
+        	if(book.taken)
+	        	swal({
+				  title: 'Are you sure ?',
+				  text: "Is the book successfully returned ?",
+				  type: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes!'
+				}).then(function () {
+					booksRef.child(book['.key']).update({"taken": false});
+					swal(
+					  'Successful',
+					  'Book returned Successfully!!!',
+					  'success'
+					);
+				});
         },
         addBook: function () {
         	if(this.book.name.trim() != '' && this.book.cover.trim() != '' ) {

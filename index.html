@@ -56,7 +56,7 @@
 		<div id="admin" v-show="isActiveTab('Admin')" class="tc white">
 			<h1 class="f1">View all books in the Library</h1>
 			<main class="cf w-100">
-			  <div v-for="book in books" class="fl w-50 w-third-m w-20-ns pa3 grow">
+			  <div v-for="book in books" class="fl w-50 w-third-m w-20-ns pa3 grow pointer" @click="returnBook(book)">
 			    <div class="aspect-ratio aspect-ratio--1x1" :class="{'sold-out': book.taken}">
 			      <img :src="book.cover" class="db tc bg-center cover aspect-ratio--object" />
 			    </div>
